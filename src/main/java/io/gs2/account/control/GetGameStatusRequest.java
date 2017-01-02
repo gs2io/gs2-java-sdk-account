@@ -17,7 +17,7 @@ public class GetGameStatusRequest extends Gs2BasicRequest<GetGameStatusRequest> 
 	}
 	
 	/** ゲーム名 */
-	String accountName;
+	String gameName;
 	
 	/**
 	 * ゲーム名を取得。
@@ -25,26 +25,26 @@ public class GetGameStatusRequest extends Gs2BasicRequest<GetGameStatusRequest> 
 	 * @return ゲーム名
 	 */
 	public String getGameName() {
-		return accountName;
+		return gameName;
 	}
 	
 	/**
 	 * ゲーム名を設定。
 	 * 
-	 * @param accountName ゲーム名
+	 * @param gameName ゲーム名
 	 */
-	public void setGameName(String accountName) {
-		this.accountName = accountName;
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
 	
 	/**
 	 * ゲーム名を設定。
 	 * 
-	 * @param accountName ゲーム名
+	 * @param gameName ゲーム名
 	 * @return this
 	 */
-	public GetGameStatusRequest withGameName(String accountName) {
-		setGameName(accountName);
+	public GetGameStatusRequest withGameName(String gameName) {
+		setGameName(gameName);
 		return this;
 	}
 }

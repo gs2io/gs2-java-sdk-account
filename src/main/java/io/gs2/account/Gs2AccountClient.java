@@ -22,20 +22,31 @@ import io.gs2.account.control.CreateAccountRequest;
 import io.gs2.account.control.CreateAccountResult;
 import io.gs2.account.control.CreateGameRequest;
 import io.gs2.account.control.CreateGameResult;
+import io.gs2.account.control.CreateTakeOverRequest;
+import io.gs2.account.control.CreateTakeOverResult;
 import io.gs2.account.control.DeleteAccountRequest;
 import io.gs2.account.control.DeleteGameRequest;
+import io.gs2.account.control.DeleteTakeOverRequest;
 import io.gs2.account.control.DescribeAccountRequest;
 import io.gs2.account.control.DescribeAccountResult;
 import io.gs2.account.control.DescribeGameRequest;
 import io.gs2.account.control.DescribeGameResult;
 import io.gs2.account.control.DescribeServiceClassRequest;
 import io.gs2.account.control.DescribeServiceClassResult;
+import io.gs2.account.control.DescribeTakeOverRequest;
+import io.gs2.account.control.DescribeTakeOverResult;
+import io.gs2.account.control.DoTakeOverRequest;
+import io.gs2.account.control.DoTakeOverResult;
 import io.gs2.account.control.GetGameRequest;
 import io.gs2.account.control.GetGameResult;
 import io.gs2.account.control.GetGameStatusRequest;
 import io.gs2.account.control.GetGameStatusResult;
+import io.gs2.account.control.GetTakeOverRequest;
+import io.gs2.account.control.GetTakeOverResult;
 import io.gs2.account.control.UpdateGameRequest;
 import io.gs2.account.control.UpdateGameResult;
+import io.gs2.account.control.UpdateTakeOverRequest;
+import io.gs2.account.control.UpdateTakeOverResult;
 import io.gs2.model.IGs2Credential;
 
 /**
@@ -70,7 +81,8 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("name", request.getName())
 				.put("description", request.getDescription())
-				.put("serviceClass", request.getServiceClass());
+				.put("serviceClass", request.getServiceClass())
+				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/game", 
 				credential, 
@@ -161,7 +173,8 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	public UpdateGameResult updateGame(UpdateGameRequest request) {
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("description", request.getDescription())
-				.put("serviceClass", request.getServiceClass());
+				.put("serviceClass", request.getServiceClass())
+				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
 		HttpPut put = createHttpPut(
 				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName(), 
 				credential, 
@@ -275,5 +288,131 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 				body.toString());
 		return doRequest(post, AuthenticationResult.class);
 	}
+
+	/**
+	 * 引き継ぎ情報を作成。<br>
+	 * <br>
+	 * GS2-Account の認証処理はアカウント発行時に自動的に作成されたIDとパスワードで認証されます。<br>
+	 * そのため、デバイスからセーブデータやアプリケーションを削除すると、以前のアカウントでログインすることは困難です。<br>
+	 * <br>
+	 * そこで、引き継ぎ情報として、ユーザの任意の認証情報をもたせることができ、<br>
+	 * その情報を利用してアカウントのID/パスワードを再取得することができるようになっています。<br>
+	 * <br>
+	 * 引き継ぎ情報には種別とユーザ固有IDとパスワードをもたせる必要があります。<br>
+	 * ユーザ固有IDとは、認証情報がメールアドレスなのか、ソーシャルログインの情報なのかといった種類を区別するための情報です。<br>
+	 * 任意の整数値を指定することが出来ますので、IDの種別ごとに自由に値をふりわけてください。<br>
+	 * <br>
+	 * ユーザ固有IDはメールアドレスやソーシャルログインのアカウントIDを記録する場所です。<br>
+	 * パスワードはメールアドレスだけでは引き継ぎ情報として脆弱なため、追加で指定できるパラメータです。<br>
+	 * ソーシャルログインの場合は任意の固定値を指定するなどして利用ください。<br>
+	 * 
+	 * @param request リクエストパラメータ
+	 * @return 作成結果
+	 */
+	public CreateTakeOverResult createTakeOver(CreateTakeOverRequest request) {
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("type", request.getType())
+				.put("userIdentifier", request.getUserIdentifier())
+				.put("password", request.getPassword());
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover", 
+				credential, 
+				ENDPOINT,
+				CreateTakeOverRequest.Constant.MODULE, 
+				CreateTakeOverRequest.Constant.FUNCTION,
+				body.toString());
+		return doRequest(post, CreateTakeOverResult.class);
+	}
 	
+	/**
+	 * 引き継ぎ情報一覧を取得。
+	 * 
+	 * @param request リクエストパラメータ
+	 * @return 引き継ぎ情報一覧
+	 */
+	public DescribeTakeOverResult describeTakeOver(DescribeTakeOverRequest request) {
+		String url = Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover";
+		List<NameValuePair> queryString = new ArrayList<>();
+		if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+		if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", request.getPageToken()));
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
+		HttpGet get = createHttpGet(
+				url, 
+				credential, 
+				ENDPOINT,
+				DescribeTakeOverRequest.Constant.MODULE, 
+				DescribeTakeOverRequest.Constant.FUNCTION);
+		return doRequest(get, DescribeTakeOverResult.class);
+	}
+
+	/**
+	 * 引き継ぎ情報を取得。
+	 * 
+	 * @param request リクエストパラメータ
+	 * @return 引き継ぎ情報
+	 */
+	public GetTakeOverResult getTakeOver(GetTakeOverRequest request) {
+		HttpGet get = createHttpGet(
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
+				credential, 
+				ENDPOINT,
+				GetTakeOverRequest.Constant.MODULE, 
+				GetTakeOverRequest.Constant.FUNCTION);
+		return doRequest(get, GetTakeOverResult.class);
+	}
+
+	/**
+	 * 引き継ぎ情報を更新。
+	 * 
+	 * @param request リクエストパラメータ
+	 * @return 更新結果
+	 */
+	public UpdateTakeOverResult updateTakeOver(UpdateTakeOverRequest request) {
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("password", request.getPassword());
+		HttpPut put = createHttpPut(
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
+				credential, 
+				ENDPOINT,
+				UpdateTakeOverRequest.Constant.MODULE, 
+				UpdateTakeOverRequest.Constant.FUNCTION,
+				body.toString());
+		return doRequest(put, UpdateTakeOverResult.class);
+	}
+
+	/**
+	 * 引き継ぎ情報を削除。
+	 * 
+	 * @param request リクエストパラメータ
+	 */
+	public void deleteTakeOver(DeleteTakeOverRequest request) {
+		HttpDelete delete = createHttpDelete(
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
+				credential, 
+				ENDPOINT,
+				DeleteTakeOverRequest.Constant.MODULE, 
+				DeleteTakeOverRequest.Constant.FUNCTION);
+		doRequest(delete, null);
+	}
+
+	/**
+	 * 引き継ぎを実行。
+	 * 
+	 * @param request リクエストパラメータ
+	 */
+	public DoTakeOverResult doTakeOver(DoTakeOverRequest request) {
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("userIdentifier", request.getUserIdentifier())
+				.put("password", request.getPassword());
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/takeover/" + request.getType(), 
+				credential, 
+				ENDPOINT,
+				DoTakeOverRequest.Constant.MODULE, 
+				DoTakeOverRequest.Constant.FUNCTION,
+				body.toString());
+		return doRequest(post, DoTakeOverResult.class);
+	}
 }

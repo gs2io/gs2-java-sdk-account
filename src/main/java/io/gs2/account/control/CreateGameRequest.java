@@ -22,6 +22,8 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 	String description;
 	/** サービスクラス */
 	String serviceClass;
+	/** データ引き継ぎ時にアカウントのパスワード変更するか */
+	Boolean changePasswordIfTakeOver;
 	
 	/**
 	 * ゲーム名を取得。
@@ -107,6 +109,35 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 	 */
 	public CreateGameRequest withServiceClass(String serviceClass) {
 		setServiceClass(serviceClass);
+		return this;
+	}
+	
+	/**
+	 * データ引き継ぎ時にアカウントのパスワード変更するかを取得。
+	 * 
+	 * @return データ引き継ぎ時にアカウントのパスワード変更するか
+	 */
+	public Boolean getChangePasswordIfTakeOver() {
+		return changePasswordIfTakeOver;
+	}
+	
+	/**
+	 * データ引き継ぎ時にアカウントのパスワード変更するかを設定。
+	 * 
+	 * @param changePasswordIfTakeOver データ引き継ぎ時にアカウントのパスワード変更するか
+	 */
+	public void setChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
+		this.changePasswordIfTakeOver = changePasswordIfTakeOver;
+	}
+	
+	/**
+	 * データ引き継ぎ時にアカウントのパスワード変更するかを設定。
+	 * 
+	 * @param changePasswordIfTakeOver データ引き継ぎ時にアカウントのパスワード変更するか
+	 * @return this
+	 */
+	public CreateGameRequest withChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
+		setChangePasswordIfTakeOver(changePasswordIfTakeOver);
 		return this;
 	}
 }

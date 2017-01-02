@@ -20,10 +20,12 @@ public class Game implements Serializable {
 	String ownerId;
 	/** ゲーム名 */
 	String name;
-	/** サービスクラス */
-	String serviceClass;
 	/** 説明文 */
 	String description;
+	/** サービスクラス */
+	String serviceClass;
+	/** データ引き継ぎ時にアカウントのパスワード変更するか */
+	Boolean changePasswordIfTakeOver;
 	/** 作成日時 */
 	Long createAt;
 	
@@ -82,6 +84,24 @@ public class Game implements Serializable {
 	}
 	
 	/**
+	 * 説明文を取得
+	 * 
+	 * @return 説明文
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * 説明文を設定
+	 * 
+	 * @param description 説明文
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	/**
 	 * サービスクラスを取得
 	 * 
 	 * @return サービスクラス
@@ -98,23 +118,23 @@ public class Game implements Serializable {
 	public void setServiceClass(String serviceClass) {
 		this.serviceClass = serviceClass;
 	}
-	
+
 	/**
-	 * 開封時自動削除を取得
+	 * 引き継ぎ時にアカウントのパスワードを変更するかを取得
 	 * 
-	 * @return 開封時自動削除
+	 * @return 引き継ぎ時にアカウントのパスワードを変更するか
 	 */
-	public String getDescription() {
-		return description;
+	public Boolean getChangePasswordIfTakeOver() {
+		return changePasswordIfTakeOver;
 	}
 	
 	/**
-	 * 説明文を設定
+	 * 引き継ぎ時にアカウントのパスワードを変更するかを設定
 	 * 
-	 * @param description 説明文
+	 * @param description 引き継ぎ時にアカウントのパスワードを変更するか
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
+		this.changePasswordIfTakeOver = changePasswordIfTakeOver;
 	}
 	
 	/**

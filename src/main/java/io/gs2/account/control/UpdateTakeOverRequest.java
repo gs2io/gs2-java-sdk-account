@@ -1,7 +1,7 @@
 package io.gs2.account.control;
 
 import io.gs2.account.Gs2Account;
-import io.gs2.control.Gs2BasicRequest;
+import io.gs2.control.Gs2UserRequest;
 
 /**
  * 引き継ぎ情報の更新リクエスト。
@@ -10,7 +10,7 @@ import io.gs2.control.Gs2BasicRequest;
  *
  */
 @SuppressWarnings("serial")
-public class UpdateTakeOverRequest extends Gs2BasicRequest<UpdateTakeOverRequest> {
+public class UpdateTakeOverRequest extends Gs2UserRequest<UpdateTakeOverRequest> {
 
 	public static class Constant extends Gs2Account.Constant {
 		public static final String FUNCTION = "UpdateTakeOver";
@@ -18,8 +18,6 @@ public class UpdateTakeOverRequest extends Gs2BasicRequest<UpdateTakeOverRequest
 
 	/** ゲーム名 */
 	String gameName;
-	/** ユーザID */
-	String userId;
 	/** 引き継ぎ種別 */
 	Integer type;
 	/** ユーザ固有ID */
@@ -55,35 +53,6 @@ public class UpdateTakeOverRequest extends Gs2BasicRequest<UpdateTakeOverRequest
 	 */
 	public UpdateTakeOverRequest withGameName(String gameName) {
 		setGameName(gameName);
-		return this;
-	}
-	
-	/**
-	 * ユーザIDを取得。
-	 * 
-	 * @return ユーザID
-	 */
-	public String getUserId() {
-		return userId;
-	}
-	
-	/**
-	 * ユーザIDを設定。
-	 * 
-	 * @param userId ユーザID
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	
-	/**
-	 * ユーザIDを設定。
-	 * 
-	 * @param userId ユーザID
-	 * @return this
-	 */
-	public UpdateTakeOverRequest withUserId(String userId) {
-		setUserId(userId);
 		return this;
 	}
 	

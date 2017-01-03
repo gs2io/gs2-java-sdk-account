@@ -315,12 +315,13 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 				.put("userIdentifier", request.getUserIdentifier())
 				.put("password", request.getPassword());
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover", 
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/takeover", 
 				credential, 
 				ENDPOINT,
 				CreateTakeOverRequest.Constant.MODULE, 
 				CreateTakeOverRequest.Constant.FUNCTION,
 				body.toString());
+		post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 		return doRequest(post, CreateTakeOverResult.class);
 	}
 	
@@ -331,7 +332,7 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	 * @return 引き継ぎ情報一覧
 	 */
 	public DescribeTakeOverResult describeTakeOver(DescribeTakeOverRequest request) {
-		String url = Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover";
+		String url = Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/takeover";
 		List<NameValuePair> queryString = new ArrayList<>();
 		if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
 		if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", request.getPageToken()));
@@ -344,6 +345,7 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 				ENDPOINT,
 				DescribeTakeOverRequest.Constant.MODULE, 
 				DescribeTakeOverRequest.Constant.FUNCTION);
+		get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 		return doRequest(get, DescribeTakeOverResult.class);
 	}
 
@@ -355,11 +357,12 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	 */
 	public GetTakeOverResult getTakeOver(GetTakeOverRequest request) {
 		HttpGet get = createHttpGet(
-				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
 				credential, 
 				ENDPOINT,
 				GetTakeOverRequest.Constant.MODULE, 
 				GetTakeOverRequest.Constant.FUNCTION);
+		get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 		return doRequest(get, GetTakeOverResult.class);
 	}
 
@@ -373,12 +376,13 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("password", request.getPassword());
 		HttpPut put = createHttpPut(
-				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
 				credential, 
 				ENDPOINT,
 				UpdateTakeOverRequest.Constant.MODULE, 
 				UpdateTakeOverRequest.Constant.FUNCTION,
 				body.toString());
+		put.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 		return doRequest(put, UpdateTakeOverResult.class);
 	}
 
@@ -389,11 +393,12 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	 */
 	public void deleteTakeOver(DeleteTakeOverRequest request) {
 		HttpDelete delete = createHttpDelete(
-				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/account/" + request.getUserId() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
+				Gs2Constant.ENDPOINT_HOST + "/game/" + request.getGameName() + "/takeover/" + request.getType() + "/" + request.getUserIdentifier(), 
 				credential, 
 				ENDPOINT,
 				DeleteTakeOverRequest.Constant.MODULE, 
 				DeleteTakeOverRequest.Constant.FUNCTION);
+		delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 		doRequest(delete, null);
 	}
 

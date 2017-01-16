@@ -106,7 +106,7 @@ public class UpdateTakeOverRequest extends Gs2UserRequest<UpdateTakeOverRequest>
 	/**
 	 * ユーザ固有IDを設定。
 	 * 
-	 * @param type ユーザ固有ID
+	 * @param userIdentifier ユーザ固有ID
 	 * @return this
 	 */
 	public UpdateTakeOverRequest withUserIdentifier(String userIdentifier) {
@@ -135,7 +135,7 @@ public class UpdateTakeOverRequest extends Gs2UserRequest<UpdateTakeOverRequest>
 	/**
 	 * 現在のパスワードを設定。
 	 * 
-	 * @param type 現在のパスワード
+	 * @param oldPassword 現在のパスワード
 	 * @return this
 	 */
 	public UpdateTakeOverRequest withOldPassword(String oldPassword) {
@@ -164,7 +164,7 @@ public class UpdateTakeOverRequest extends Gs2UserRequest<UpdateTakeOverRequest>
 	/**
 	 * 新しいパスワードを設定。
 	 * 
-	 * @param type 新しいパスワード
+	 * @param password 新しいパスワード
 	 * @return this
 	 */
 	public UpdateTakeOverRequest withPassword(String password) {

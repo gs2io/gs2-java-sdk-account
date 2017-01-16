@@ -104,7 +104,7 @@ public class DoTakeOverRequest extends Gs2BasicRequest<DoTakeOverRequest> {
 	/**
 	 * ユーザ固有IDを設定。
 	 * 
-	 * @param type ユーザ固有ID
+	 * @param userIdentifier ユーザ固有ID
 	 * @return this
 	 */
 	public DoTakeOverRequest withUserIdentifier(String userIdentifier) {
@@ -133,7 +133,7 @@ public class DoTakeOverRequest extends Gs2BasicRequest<DoTakeOverRequest> {
 	/**
 	 * 新しいパスワードを設定。
 	 * 
-	 * @param type 新しいパスワード
+	 * @param password 新しいパスワード
 	 * @return this
 	 */
 	public DoTakeOverRequest withPassword(String password) {

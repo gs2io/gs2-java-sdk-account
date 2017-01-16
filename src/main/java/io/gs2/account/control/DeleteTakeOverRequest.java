@@ -102,7 +102,7 @@ public class DeleteTakeOverRequest extends Gs2UserRequest<DeleteTakeOverRequest>
 	/**
 	 * ユーザ固有IDを設定。
 	 * 
-	 * @param type ユーザ固有ID
+	 * @param userIdentifier ユーザ固有ID
 	 * @return this
 	 */
 	public DeleteTakeOverRequest withUserIdentifier(String userIdentifier) {

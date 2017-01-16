@@ -102,7 +102,7 @@ public class GetTakeOverRequest extends Gs2UserRequest<GetTakeOverRequest> {
 	/**
 	 * ユーザ固有IDを設定。
 	 * 
-	 * @param type ユーザ固有ID
+	 * @param userIdentifier ユーザ固有ID
 	 * @return this
 	 */
 	public GetTakeOverRequest withUserIdentifier(String userIdentifier) {

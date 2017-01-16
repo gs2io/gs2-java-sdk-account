@@ -406,6 +406,7 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	 * 引き継ぎを実行。
 	 * 
 	 * @param request リクエストパラメータ
+	 * @return 引き継ぎ結果
 	 */
 	public DoTakeOverResult doTakeOver(DoTakeOverRequest request) {
 		ObjectNode body = JsonNodeFactory.instance.objectNode()

@@ -46,7 +46,7 @@ public class CreateTakeOverRequest extends Gs2UserRequest<CreateTakeOverRequest>
 	/**
 	 * ゲーム名を設定。
 	 * 
-	 * @param name ゲーム名
+	 * @param gameName ゲーム名
 	 * @return this
 	 */
 	public CreateTakeOverRequest withGameName(String gameName) {
@@ -104,7 +104,7 @@ public class CreateTakeOverRequest extends Gs2UserRequest<CreateTakeOverRequest>
 	/**
 	 * ユーザ固有IDを設定。
 	 * 
-	 * @param type ユーザ固有ID
+	 * @param userIdentifier ユーザ固有ID
 	 * @return this
 	 */
 	public CreateTakeOverRequest withUserIdentifier(String userIdentifier) {

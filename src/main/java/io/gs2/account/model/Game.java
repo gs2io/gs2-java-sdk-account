@@ -131,7 +131,7 @@ public class Game implements Serializable {
 	/**
 	 * 引き継ぎ時にアカウントのパスワードを変更するかを設定
 	 * 
-	 * @param description 引き継ぎ時にアカウントのパスワードを変更するか
+	 * @param changePasswordIfTakeOver 引き継ぎ時にアカウントのパスワードを変更するか
 	 */
 	public void setChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
 		this.changePasswordIfTakeOver = changePasswordIfTakeOver;

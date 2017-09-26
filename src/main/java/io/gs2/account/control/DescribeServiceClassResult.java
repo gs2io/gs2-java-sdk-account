@@ -2,12 +2,15 @@ package io.gs2.account.control;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * カテゴリ一覧取得結果。
  * 
  * @author Game Server Services, Inc.
  *
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class DescribeServiceClassResult {
 
 	/** カテゴリ一覧 */

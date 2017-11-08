@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.gs2</groupId>
 	<artifactId>gs2-java-sdk-account</artifactId>
-	<version>0.2.1</version>
+	<version>0.3.1</version>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -13,13 +13,8 @@
 		</dependency>
 		<dependency>
 			<groupId>io.gs2</groupId>
-			<artifactId>gs2-java-sdk-core</artifactId>
-			<version>0.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.gs2</groupId>
 			<artifactId>gs2-java-sdk-auth</artifactId>
-			<version>0.2.0</version>
+			<version>0.3.1</version>
 		</dependency>
 	</dependencies>
 	
@@ -61,9 +56,6 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<configuration>
-						<argLine>${jacocoArgs}</argLine>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

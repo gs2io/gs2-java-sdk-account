@@ -1,68 +1,73 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.account.control;
 
+import org.json.JSONObject;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import io.gs2.account.model.Account;
+import io.gs2.account.model.*;
 
 /**
- * アカウント一覧取得結果。
- * 
  * @author Game Server Services, Inc.
- *
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class DescribeAccountResult {
 
-	/** アカウント一覧 */
-	List<Account> items;
-	/** 次のページを取得するためのトークン */
-	String nextPageToken;
-	
-	/**
-	 * 取得したアカウント数を取得。
-	 * 
-	 * @return 取得したアカウント数
-	 */
-	public Integer getCount() {
-		return items == null ? null : items.size();
-	}
+	/** 次のページを読み込むためのトークン */
+	private String nextPageToken;
 
-	@Deprecated
-	public void setCount(Integer count){ }
-	
+	/** 引き継ぎ情報 */
+	private List<Account> items;
+
+
 	/**
-	 * 取得したアカウント一覧を取得。
-	 * 
-	 * @return アカウント一覧
-	 */
-	public List<Account> getItems() {
-		return items;
-	}
-	
-	/**
-	 * アカウント一覧を設定。
-	 * 
-	 * @param items アカウント一覧
-	 */
-	public void setItems(List<Account> items) {
-		this.items = items;
-	}
-	
-	/**
-	 * 次のページを取得するためのトークンを取得。
-	 * 
-	 * {@link DescribeAccountRequest} に指定することで、次のページを取得できます。
-	 * 
-	 * @return トークン
+	 * 次のページを読み込むためのトークンを取得
+	 *
+	 * @return 次のページを読み込むためのトークン
 	 */
 	public String getNextPageToken() {
 		return nextPageToken;
 	}
 
+	/**
+	 * 次のページを読み込むためのトークンを設定
+	 *
+	 * @param nextPageToken 次のページを読み込むためのトークン
+	 */
 	public void setNextPageToken(String nextPageToken) {
 		this.nextPageToken = nextPageToken;
+	}
+
+	/**
+	 * 引き継ぎ情報を取得
+	 *
+	 * @return 引き継ぎ情報
+	 */
+	public List<Account> getItems() {
+		return items;
+	}
+
+	/**
+	 * 引き継ぎ情報を設定
+	 *
+	 * @param items 引き継ぎ情報
+	 */
+	public void setItems(List<Account> items) {
+		this.items = items;
 	}
 
 }

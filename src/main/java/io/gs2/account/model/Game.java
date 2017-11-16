@@ -33,11 +33,29 @@ public class Game implements Serializable {
 	/** ゲームGRN */
 	private String gameId;
 
+	/** アカウント新規作成時 に実行されるGS2-Script */
+	private String createAccountTriggerScript;
+
 	/** ゲーム名 */
 	private String name;
 
+	/** 引き継ぎ情報登録完了時 に実行されるGS2-Script */
+	private String createTakeOverDoneTriggerScript;
+
 	/** サービスクラス */
 	private String serviceClass;
+
+	/** アカウント新規作成完了時 に実行されるGS2-Script */
+	private String createAccountDoneTriggerScript;
+
+	/** 引き継ぎ実行完了時 に実行されるGS2-Script */
+	private String doTakeOverDoneTriggerScript;
+
+	/** 引き継ぎ情報登録時 に実行されるGS2-Script */
+	private String createTakeOverTriggerScript;
+
+	/** 引き継ぎ実行時 に実行されるGS2-Script */
+	private String doTakeOverTriggerScript;
 
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
@@ -74,6 +92,24 @@ public class Game implements Serializable {
 	}
 
 	/**
+	 * アカウント新規作成時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return アカウント新規作成時 に実行されるGS2-Script
+	 */
+	public String getCreateAccountTriggerScript() {
+		return createAccountTriggerScript;
+	}
+
+	/**
+	 * アカウント新規作成時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createAccountTriggerScript アカウント新規作成時 に実行されるGS2-Script
+	 */
+	public void setCreateAccountTriggerScript(String createAccountTriggerScript) {
+		this.createAccountTriggerScript = createAccountTriggerScript;
+	}
+
+	/**
 	 * ゲーム名を取得
 	 *
 	 * @return ゲーム名
@@ -92,6 +128,24 @@ public class Game implements Serializable {
 	}
 
 	/**
+	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 */
+	public String getCreateTakeOverDoneTriggerScript() {
+		return createTakeOverDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createTakeOverDoneTriggerScript 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 */
+	public void setCreateTakeOverDoneTriggerScript(String createTakeOverDoneTriggerScript) {
+		this.createTakeOverDoneTriggerScript = createTakeOverDoneTriggerScript;
+	}
+
+	/**
 	 * サービスクラスを取得
 	 *
 	 * @return サービスクラス
@@ -107,6 +161,78 @@ public class Game implements Serializable {
 	 */
 	public void setServiceClass(String serviceClass) {
 		this.serviceClass = serviceClass;
+	}
+
+	/**
+	 * アカウント新規作成完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return アカウント新規作成完了時 に実行されるGS2-Script
+	 */
+	public String getCreateAccountDoneTriggerScript() {
+		return createAccountDoneTriggerScript;
+	}
+
+	/**
+	 * アカウント新規作成完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createAccountDoneTriggerScript アカウント新規作成完了時 に実行されるGS2-Script
+	 */
+	public void setCreateAccountDoneTriggerScript(String createAccountDoneTriggerScript) {
+		this.createAccountDoneTriggerScript = createAccountDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 引き継ぎ実行完了時 に実行されるGS2-Script
+	 */
+	public String getDoTakeOverDoneTriggerScript() {
+		return doTakeOverDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param doTakeOverDoneTriggerScript 引き継ぎ実行完了時 に実行されるGS2-Script
+	 */
+	public void setDoTakeOverDoneTriggerScript(String doTakeOverDoneTriggerScript) {
+		this.doTakeOverDoneTriggerScript = doTakeOverDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ情報登録時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 引き継ぎ情報登録時 に実行されるGS2-Script
+	 */
+	public String getCreateTakeOverTriggerScript() {
+		return createTakeOverTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ情報登録時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createTakeOverTriggerScript 引き継ぎ情報登録時 に実行されるGS2-Script
+	 */
+	public void setCreateTakeOverTriggerScript(String createTakeOverTriggerScript) {
+		this.createTakeOverTriggerScript = createTakeOverTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ実行時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 引き継ぎ実行時 に実行されるGS2-Script
+	 */
+	public String getDoTakeOverTriggerScript() {
+		return doTakeOverTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ実行時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param doTakeOverTriggerScript 引き継ぎ実行時 に実行されるGS2-Script
+	 */
+	public void setDoTakeOverTriggerScript(String doTakeOverTriggerScript) {
+		this.doTakeOverTriggerScript = doTakeOverTriggerScript;
 	}
 
 	/**

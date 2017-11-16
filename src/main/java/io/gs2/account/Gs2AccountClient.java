@@ -125,10 +125,16 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	public CreateGameResult createGame(CreateGameRequest request) {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver())
+				.put("name", request.getName())
 				.put("serviceClass", request.getServiceClass())
-				.put("name", request.getName());
+				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
 
+        if(request.getCreateAccountTriggerScript() != null) body.put("createAccountTriggerScript", request.getCreateAccountTriggerScript());
+        if(request.getCreateTakeOverDoneTriggerScript() != null) body.put("createTakeOverDoneTriggerScript", request.getCreateTakeOverDoneTriggerScript());
+        if(request.getCreateAccountDoneTriggerScript() != null) body.put("createAccountDoneTriggerScript", request.getCreateAccountDoneTriggerScript());
+        if(request.getDoTakeOverDoneTriggerScript() != null) body.put("doTakeOverDoneTriggerScript", request.getDoTakeOverDoneTriggerScript());
+        if(request.getCreateTakeOverTriggerScript() != null) body.put("createTakeOverTriggerScript", request.getCreateTakeOverTriggerScript());
+        if(request.getDoTakeOverTriggerScript() != null) body.put("doTakeOverTriggerScript", request.getDoTakeOverTriggerScript());
         if(request.getDescription() != null) body.put("description", request.getDescription());
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/game",
@@ -515,10 +521,16 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	public UpdateGameResult updateGame(UpdateGameRequest request) {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver())
-				.put("serviceClass", request.getServiceClass());
+				.put("serviceClass", request.getServiceClass())
+				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
 
+        if(request.getCreateAccountTriggerScript() != null) body.put("createAccountTriggerScript", request.getCreateAccountTriggerScript());
         if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getCreateTakeOverDoneTriggerScript() != null) body.put("createTakeOverDoneTriggerScript", request.getCreateTakeOverDoneTriggerScript());
+        if(request.getCreateAccountDoneTriggerScript() != null) body.put("createAccountDoneTriggerScript", request.getCreateAccountDoneTriggerScript());
+        if(request.getDoTakeOverDoneTriggerScript() != null) body.put("doTakeOverDoneTriggerScript", request.getDoTakeOverDoneTriggerScript());
+        if(request.getCreateTakeOverTriggerScript() != null) body.put("createTakeOverTriggerScript", request.getCreateTakeOverTriggerScript());
+        if(request.getDoTakeOverTriggerScript() != null) body.put("doTakeOverTriggerScript", request.getDoTakeOverTriggerScript());
 		HttpPut put = createHttpPut(
 				Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null ? "null" : request.getGameName()) + "",
 				credential,

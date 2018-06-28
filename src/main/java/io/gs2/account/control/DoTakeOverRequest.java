@@ -37,11 +37,11 @@ public class DoTakeOverRequest extends Gs2BasicRequest<DoTakeOverRequest> {
 	/** 引き継ぎ情報の種類を指定します。 */
 	private Integer type;
 
-	/** 引き継ぎ設定に指定されたパスワード */
-	private String password;
-
 	/** 引き継ぎ情報のユーザ固有ID */
 	private String userIdentifier;
+
+	/** 引き継ぎ設定に指定されたパスワード */
+	private String password;
 
 
 	/**
@@ -103,35 +103,6 @@ public class DoTakeOverRequest extends Gs2BasicRequest<DoTakeOverRequest> {
 	}
 
 	/**
-	 * 引き継ぎ設定に指定されたパスワードを取得
-	 *
-	 * @return 引き継ぎ設定に指定されたパスワード
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * 引き継ぎ設定に指定されたパスワードを設定
-	 *
-	 * @param password 引き継ぎ設定に指定されたパスワード
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * 引き継ぎ設定に指定されたパスワードを設定
-	 *
-	 * @param password 引き継ぎ設定に指定されたパスワード
-	 * @return this
-	 */
-	public DoTakeOverRequest withPassword(String password) {
-		setPassword(password);
-		return this;
-	}
-
-	/**
 	 * 引き継ぎ情報のユーザ固有IDを取得
 	 *
 	 * @return 引き継ぎ情報のユーザ固有ID
@@ -157,6 +128,35 @@ public class DoTakeOverRequest extends Gs2BasicRequest<DoTakeOverRequest> {
 	 */
 	public DoTakeOverRequest withUserIdentifier(String userIdentifier) {
 		setUserIdentifier(userIdentifier);
+		return this;
+	}
+
+	/**
+	 * 引き継ぎ設定に指定されたパスワードを取得
+	 *
+	 * @return 引き継ぎ設定に指定されたパスワード
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * 引き継ぎ設定に指定されたパスワードを設定
+	 *
+	 * @param password 引き継ぎ設定に指定されたパスワード
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * 引き継ぎ設定に指定されたパスワードを設定
+	 *
+	 * @param password 引き継ぎ設定に指定されたパスワード
+	 * @return this
+	 */
+	public DoTakeOverRequest withPassword(String password) {
+		setPassword(password);
 		return this;
 	}
 

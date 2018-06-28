@@ -37,11 +37,11 @@ public class AuthenticationRequest extends Gs2BasicRequest<AuthenticationRequest
 	/** 認証する対象アカウントのユーザIDを指定します。 */
 	private String userId;
 
-	/** 認証に利用するパスワード */
-	private String password;
-
 	/** 認証結果の暗号化に利用する GS2-Key の暗号鍵名 */
 	private String keyName;
+
+	/** 認証に利用するパスワード */
+	private String password;
 
 
 	/**
@@ -103,35 +103,6 @@ public class AuthenticationRequest extends Gs2BasicRequest<AuthenticationRequest
 	}
 
 	/**
-	 * 認証に利用するパスワードを取得
-	 *
-	 * @return 認証に利用するパスワード
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * 認証に利用するパスワードを設定
-	 *
-	 * @param password 認証に利用するパスワード
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * 認証に利用するパスワードを設定
-	 *
-	 * @param password 認証に利用するパスワード
-	 * @return this
-	 */
-	public AuthenticationRequest withPassword(String password) {
-		setPassword(password);
-		return this;
-	}
-
-	/**
 	 * 認証結果の暗号化に利用する GS2-Key の暗号鍵名を取得
 	 *
 	 * @return 認証結果の暗号化に利用する GS2-Key の暗号鍵名
@@ -157,6 +128,35 @@ public class AuthenticationRequest extends Gs2BasicRequest<AuthenticationRequest
 	 */
 	public AuthenticationRequest withKeyName(String keyName) {
 		setKeyName(keyName);
+		return this;
+	}
+
+	/**
+	 * 認証に利用するパスワードを取得
+	 *
+	 * @return 認証に利用するパスワード
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * 認証に利用するパスワードを設定
+	 *
+	 * @param password 認証に利用するパスワード
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * 認証に利用するパスワードを設定
+	 *
+	 * @param password 認証に利用するパスワード
+	 * @return this
+	 */
+	public AuthenticationRequest withPassword(String password) {
+		setPassword(password);
 		return this;
 	}
 

@@ -34,14 +34,14 @@ public class CreateTakeOverRequest extends Gs2UserRequest<CreateTakeOverRequest>
 	/** ゲームの名前を指定します。 */
 	private String gameName;
 
-	/** 引き継ぎ時に利用するパスワード */
-	private String password;
-
 	/** 引き継ぎ情報の種類を表す数値 */
 	private Integer type;
 
 	/** 引き継ぎに使用するユーザ固有のID */
 	private String userIdentifier;
+
+	/** 引き継ぎ時に利用するパスワード */
+	private String password;
 
 
 	/**
@@ -70,35 +70,6 @@ public class CreateTakeOverRequest extends Gs2UserRequest<CreateTakeOverRequest>
 	 */
 	public CreateTakeOverRequest withGameName(String gameName) {
 		setGameName(gameName);
-		return this;
-	}
-
-	/**
-	 * 引き継ぎ時に利用するパスワードを取得
-	 *
-	 * @return 引き継ぎ時に利用するパスワード
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * 引き継ぎ時に利用するパスワードを設定
-	 *
-	 * @param password 引き継ぎ時に利用するパスワード
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * 引き継ぎ時に利用するパスワードを設定
-	 *
-	 * @param password 引き継ぎ時に利用するパスワード
-	 * @return this
-	 */
-	public CreateTakeOverRequest withPassword(String password) {
-		setPassword(password);
 		return this;
 	}
 
@@ -157,6 +128,35 @@ public class CreateTakeOverRequest extends Gs2UserRequest<CreateTakeOverRequest>
 	 */
 	public CreateTakeOverRequest withUserIdentifier(String userIdentifier) {
 		setUserIdentifier(userIdentifier);
+		return this;
+	}
+
+	/**
+	 * 引き継ぎ時に利用するパスワードを取得
+	 *
+	 * @return 引き継ぎ時に利用するパスワード
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * 引き継ぎ時に利用するパスワードを設定
+	 *
+	 * @param password 引き継ぎ時に利用するパスワード
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * 引き継ぎ時に利用するパスワードを設定
+	 *
+	 * @param password 引き継ぎ時に利用するパスワード
+	 * @return this
+	 */
+	public CreateTakeOverRequest withPassword(String password) {
+		setPassword(password);
 		return this;
 	}
 

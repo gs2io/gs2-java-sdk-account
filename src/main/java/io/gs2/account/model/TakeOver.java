@@ -33,14 +33,14 @@ public class TakeOver implements Serializable {
 	/** ユーザID */
 	private String userId;
 
-	/** 作成日時(エポック秒) */
-	private Integer createAt;
-
 	/** アカウント種別 */
 	private Integer type;
 
 	/** ユーザ識別子 */
 	private String userIdentifier;
+
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
 
 
 	/**
@@ -59,24 +59,6 @@ public class TakeOver implements Serializable {
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	/**
-	 * 作成日時(エポック秒)を取得
-	 *
-	 * @return 作成日時(エポック秒)
-	 */
-	public Integer getCreateAt() {
-		return createAt;
-	}
-
-	/**
-	 * 作成日時(エポック秒)を設定
-	 *
-	 * @param createAt 作成日時(エポック秒)
-	 */
-	public void setCreateAt(Integer createAt) {
-		this.createAt = createAt;
 	}
 
 	/**
@@ -113,6 +95,24 @@ public class TakeOver implements Serializable {
 	 */
 	public void setUserIdentifier(String userIdentifier) {
 		this.userIdentifier = userIdentifier;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
+	 */
+	public Integer getCreateAt() {
+		return createAt;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
+	 */
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
 	}
 
 }

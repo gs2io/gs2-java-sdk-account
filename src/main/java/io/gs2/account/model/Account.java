@@ -21,7 +21,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * 引き継ぎ情報
+ * アカウント情報
  *
  * @author Game Server Services, Inc.
  *
@@ -30,33 +30,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Account implements Serializable {
 
-	/** パスワード */
-	private String password;
-
 	/** ユーザID */
 	private String userId;
+
+	/** パスワード */
+	private String password;
 
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
 
-
-	/**
-	 * パスワードを取得
-	 *
-	 * @return パスワード
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * パスワードを設定
-	 *
-	 * @param password パスワード
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	/**
 	 * ユーザIDを取得
@@ -74,6 +56,24 @@ public class Account implements Serializable {
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	/**
+	 * パスワードを取得
+	 *
+	 * @return パスワード
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * パスワードを設定
+	 *
+	 * @param password パスワード
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**

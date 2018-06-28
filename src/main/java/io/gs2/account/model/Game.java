@@ -33,44 +33,50 @@ public class Game implements Serializable {
 	/** ゲームGRN */
 	private String gameId;
 
-	/** アカウント新規作成時 に実行されるGS2-Script */
-	private String createAccountTriggerScript;
+	/** オーナーID */
+	private String ownerId;
 
 	/** ゲーム名 */
 	private String name;
 
-	/** 引き継ぎ情報登録完了時 に実行されるGS2-Script */
-	private String createTakeOverDoneTriggerScript;
+	/** 説明文 */
+	private String description;
 
 	/** サービスクラス */
 	private String serviceClass;
 
+	/** アカウント引き継ぎ時にパスワードを変更するか */
+	private Boolean changePasswordIfTakeOver;
+
+	/** アカウント新規作成時 に実行されるGS2-Script */
+	private String createAccountTriggerScript;
+
 	/** アカウント新規作成完了時 に実行されるGS2-Script */
 	private String createAccountDoneTriggerScript;
 
-	/** 引き継ぎ実行完了時 に実行されるGS2-Script */
-	private String doTakeOverDoneTriggerScript;
+	/** 認証時 に実行されるGS2-Script */
+	private String authenticationTriggerScript;
+
+	/** 認証完了時 に実行されるGS2-Script */
+	private String authenticationDoneTriggerScript;
 
 	/** 引き継ぎ情報登録時 に実行されるGS2-Script */
 	private String createTakeOverTriggerScript;
 
+	/** 引き継ぎ情報登録完了時 に実行されるGS2-Script */
+	private String createTakeOverDoneTriggerScript;
+
 	/** 引き継ぎ実行時 に実行されるGS2-Script */
 	private String doTakeOverTriggerScript;
+
+	/** 引き継ぎ実行完了時 に実行されるGS2-Script */
+	private String doTakeOverDoneTriggerScript;
 
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
 
-	/** オーナーID */
-	private String ownerId;
-
-	/** アカウント引き継ぎ時にパスワードを変更するか */
-	private Boolean changePasswordIfTakeOver;
-
 	/** 最終更新日時(エポック秒) */
 	private Integer updateAt;
-
-	/** 説明文 */
-	private String description;
 
 
 	/**
@@ -92,21 +98,21 @@ public class Game implements Serializable {
 	}
 
 	/**
-	 * アカウント新規作成時 に実行されるGS2-Scriptを取得
+	 * オーナーIDを取得
 	 *
-	 * @return アカウント新規作成時 に実行されるGS2-Script
+	 * @return オーナーID
 	 */
-	public String getCreateAccountTriggerScript() {
-		return createAccountTriggerScript;
+	public String getOwnerId() {
+		return ownerId;
 	}
 
 	/**
-	 * アカウント新規作成時 に実行されるGS2-Scriptを設定
+	 * オーナーIDを設定
 	 *
-	 * @param createAccountTriggerScript アカウント新規作成時 に実行されるGS2-Script
+	 * @param ownerId オーナーID
 	 */
-	public void setCreateAccountTriggerScript(String createAccountTriggerScript) {
-		this.createAccountTriggerScript = createAccountTriggerScript;
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
 	}
 
 	/**
@@ -128,21 +134,21 @@ public class Game implements Serializable {
 	}
 
 	/**
-	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを取得
+	 * 説明文を取得
 	 *
-	 * @return 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 * @return 説明文
 	 */
-	public String getCreateTakeOverDoneTriggerScript() {
-		return createTakeOverDoneTriggerScript;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを設定
+	 * 説明文を設定
 	 *
-	 * @param createTakeOverDoneTriggerScript 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 * @param description 説明文
 	 */
-	public void setCreateTakeOverDoneTriggerScript(String createTakeOverDoneTriggerScript) {
-		this.createTakeOverDoneTriggerScript = createTakeOverDoneTriggerScript;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -164,6 +170,42 @@ public class Game implements Serializable {
 	}
 
 	/**
+	 * アカウント引き継ぎ時にパスワードを変更するかを取得
+	 *
+	 * @return アカウント引き継ぎ時にパスワードを変更するか
+	 */
+	public Boolean getChangePasswordIfTakeOver() {
+		return changePasswordIfTakeOver;
+	}
+
+	/**
+	 * アカウント引き継ぎ時にパスワードを変更するかを設定
+	 *
+	 * @param changePasswordIfTakeOver アカウント引き継ぎ時にパスワードを変更するか
+	 */
+	public void setChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
+		this.changePasswordIfTakeOver = changePasswordIfTakeOver;
+	}
+
+	/**
+	 * アカウント新規作成時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return アカウント新規作成時 に実行されるGS2-Script
+	 */
+	public String getCreateAccountTriggerScript() {
+		return createAccountTriggerScript;
+	}
+
+	/**
+	 * アカウント新規作成時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createAccountTriggerScript アカウント新規作成時 に実行されるGS2-Script
+	 */
+	public void setCreateAccountTriggerScript(String createAccountTriggerScript) {
+		this.createAccountTriggerScript = createAccountTriggerScript;
+	}
+
+	/**
 	 * アカウント新規作成完了時 に実行されるGS2-Scriptを取得
 	 *
 	 * @return アカウント新規作成完了時 に実行されるGS2-Script
@@ -182,21 +224,39 @@ public class Game implements Serializable {
 	}
 
 	/**
-	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを取得
+	 * 認証時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return 引き継ぎ実行完了時 に実行されるGS2-Script
+	 * @return 認証時 に実行されるGS2-Script
 	 */
-	public String getDoTakeOverDoneTriggerScript() {
-		return doTakeOverDoneTriggerScript;
+	public String getAuthenticationTriggerScript() {
+		return authenticationTriggerScript;
 	}
 
 	/**
-	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを設定
+	 * 認証時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param doTakeOverDoneTriggerScript 引き継ぎ実行完了時 に実行されるGS2-Script
+	 * @param authenticationTriggerScript 認証時 に実行されるGS2-Script
 	 */
-	public void setDoTakeOverDoneTriggerScript(String doTakeOverDoneTriggerScript) {
-		this.doTakeOverDoneTriggerScript = doTakeOverDoneTriggerScript;
+	public void setAuthenticationTriggerScript(String authenticationTriggerScript) {
+		this.authenticationTriggerScript = authenticationTriggerScript;
+	}
+
+	/**
+	 * 認証完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 認証完了時 に実行されるGS2-Script
+	 */
+	public String getAuthenticationDoneTriggerScript() {
+		return authenticationDoneTriggerScript;
+	}
+
+	/**
+	 * 認証完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param authenticationDoneTriggerScript 認証完了時 に実行されるGS2-Script
+	 */
+	public void setAuthenticationDoneTriggerScript(String authenticationDoneTriggerScript) {
+		this.authenticationDoneTriggerScript = authenticationDoneTriggerScript;
 	}
 
 	/**
@@ -218,6 +278,24 @@ public class Game implements Serializable {
 	}
 
 	/**
+	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 */
+	public String getCreateTakeOverDoneTriggerScript() {
+		return createTakeOverDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createTakeOverDoneTriggerScript 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 */
+	public void setCreateTakeOverDoneTriggerScript(String createTakeOverDoneTriggerScript) {
+		this.createTakeOverDoneTriggerScript = createTakeOverDoneTriggerScript;
+	}
+
+	/**
 	 * 引き継ぎ実行時 に実行されるGS2-Scriptを取得
 	 *
 	 * @return 引き継ぎ実行時 に実行されるGS2-Script
@@ -233,6 +311,24 @@ public class Game implements Serializable {
 	 */
 	public void setDoTakeOverTriggerScript(String doTakeOverTriggerScript) {
 		this.doTakeOverTriggerScript = doTakeOverTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 引き継ぎ実行完了時 に実行されるGS2-Script
+	 */
+	public String getDoTakeOverDoneTriggerScript() {
+		return doTakeOverDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param doTakeOverDoneTriggerScript 引き継ぎ実行完了時 に実行されるGS2-Script
+	 */
+	public void setDoTakeOverDoneTriggerScript(String doTakeOverDoneTriggerScript) {
+		this.doTakeOverDoneTriggerScript = doTakeOverDoneTriggerScript;
 	}
 
 	/**
@@ -254,42 +350,6 @@ public class Game implements Serializable {
 	}
 
 	/**
-	 * オーナーIDを取得
-	 *
-	 * @return オーナーID
-	 */
-	public String getOwnerId() {
-		return ownerId;
-	}
-
-	/**
-	 * オーナーIDを設定
-	 *
-	 * @param ownerId オーナーID
-	 */
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
-	}
-
-	/**
-	 * アカウント引き継ぎ時にパスワードを変更するかを取得
-	 *
-	 * @return アカウント引き継ぎ時にパスワードを変更するか
-	 */
-	public Boolean getChangePasswordIfTakeOver() {
-		return changePasswordIfTakeOver;
-	}
-
-	/**
-	 * アカウント引き継ぎ時にパスワードを変更するかを設定
-	 *
-	 * @param changePasswordIfTakeOver アカウント引き継ぎ時にパスワードを変更するか
-	 */
-	public void setChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
-		this.changePasswordIfTakeOver = changePasswordIfTakeOver;
-	}
-
-	/**
 	 * 最終更新日時(エポック秒)を取得
 	 *
 	 * @return 最終更新日時(エポック秒)
@@ -305,24 +365,6 @@ public class Game implements Serializable {
 	 */
 	public void setUpdateAt(Integer updateAt) {
 		this.updateAt = updateAt;
-	}
-
-	/**
-	 * 説明文を取得
-	 *
-	 * @return 説明文
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * 説明文を設定
-	 *
-	 * @param description 説明文
-	 */
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 }

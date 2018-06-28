@@ -27,12 +27,30 @@ import io.gs2.account.model.*;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class DescribeAccountResult {
 
+	/** アカウント情報 */
+	private List<Account> items;
+
 	/** 次のページを読み込むためのトークン */
 	private String nextPageToken;
 
-	/** 引き継ぎ情報 */
-	private List<Account> items;
 
+	/**
+	 * アカウント情報を取得
+	 *
+	 * @return アカウント情報
+	 */
+	public List<Account> getItems() {
+		return items;
+	}
+
+	/**
+	 * アカウント情報を設定
+	 *
+	 * @param items アカウント情報
+	 */
+	public void setItems(List<Account> items) {
+		this.items = items;
+	}
 
 	/**
 	 * 次のページを読み込むためのトークンを取得
@@ -50,24 +68,6 @@ public class DescribeAccountResult {
 	 */
 	public void setNextPageToken(String nextPageToken) {
 		this.nextPageToken = nextPageToken;
-	}
-
-	/**
-	 * 引き継ぎ情報を取得
-	 *
-	 * @return 引き継ぎ情報
-	 */
-	public List<Account> getItems() {
-		return items;
-	}
-
-	/**
-	 * 引き継ぎ情報を設定
-	 *
-	 * @param items 引き継ぎ情報
-	 */
-	public void setItems(List<Account> items) {
-		this.items = items;
 	}
 
 }

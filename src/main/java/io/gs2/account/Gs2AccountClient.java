@@ -18,7 +18,9 @@ package io.gs2.account;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import io.gs2.model.Region;
 import io.gs2.util.EncodingUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpDelete;
@@ -53,6 +55,26 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 	 */
 	public Gs2AccountClient(IGs2Credential credential) {
 		super(credential);
+	}
+
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2AccountClient(IGs2Credential credential, Region region) {
+		super(credential, region);
+	}
+
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2AccountClient(IGs2Credential credential, String region) {
+		super(credential, region);
 	}
 
 
@@ -125,84 +147,6 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 
 
 	/**
-	 * ゲームを新規作成します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public CreateGameResult createGame(CreateGameRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("name", request.getName())
-				.put("serviceClass", request.getServiceClass())
-				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
-
-        if(request.getDescription() != null) body.put("description", request.getDescription());
-        if(request.getCreateAccountTriggerScript() != null) body.put("createAccountTriggerScript", request.getCreateAccountTriggerScript());
-        if(request.getCreateAccountDoneTriggerScript() != null) body.put("createAccountDoneTriggerScript", request.getCreateAccountDoneTriggerScript());
-        if(request.getCreateTakeOverTriggerScript() != null) body.put("createTakeOverTriggerScript", request.getCreateTakeOverTriggerScript());
-        if(request.getCreateTakeOverDoneTriggerScript() != null) body.put("createTakeOverDoneTriggerScript", request.getCreateTakeOverDoneTriggerScript());
-        if(request.getDoTakeOverTriggerScript() != null) body.put("doTakeOverTriggerScript", request.getDoTakeOverTriggerScript());
-        if(request.getDoTakeOverDoneTriggerScript() != null) body.put("doTakeOverDoneTriggerScript", request.getDoTakeOverDoneTriggerScript());
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/game",
-				credential,
-				ENDPOINT,
-				CreateGameRequest.Constant.MODULE,
-				CreateGameRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(post, CreateGameResult.class);
-
-	}
-
-
-	/**
-	 * 引き継ぎ情報を登録します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public CreateTakeOverResult createTakeOver(CreateTakeOverRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("type", request.getType())
-				.put("userIdentifier", request.getUserIdentifier())
-				.put("password", request.getPassword());
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "/takeover",
-				credential,
-				ENDPOINT,
-				CreateTakeOverRequest.Constant.MODULE,
-				CreateTakeOverRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(post, CreateTakeOverResult.class);
-
-	}
-
-
-	/**
 	 * アカウントを削除します<br>
 	 * <br>
 	 * - 消費クオータ: 10<br>
@@ -228,69 +172,6 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
             delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
         }
 
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * ゲームを削除します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 */
-
-	public void deleteGame(DeleteGameRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				DeleteGameRequest.Constant.MODULE,
-				DeleteGameRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * 引き継ぎ情報を削除します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 */
-
-	public void deleteTakeOver(DeleteTakeOverRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "/takeover/" + (request.getType() == null || request.getType().equals("") ? "null" : request.getType()) + "/" + (request.getUserIdentifier() == null || request.getUserIdentifier().equals("") ? "null" : request.getUserIdentifier()) + "";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				DeleteTakeOverRequest.Constant.MODULE,
-				DeleteTakeOverRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		doRequest(delete, null);
 
@@ -333,6 +214,79 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 
 
 		return doRequest(get, DescribeAccountResult.class);
+
+	}
+
+
+	/**
+	 * ゲームを新規作成します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public CreateGameResult createGame(CreateGameRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("name", request.getName())
+				.put("serviceClass", request.getServiceClass())
+				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getCreateAccountTriggerScript() != null) body.put("createAccountTriggerScript", request.getCreateAccountTriggerScript());
+        if(request.getCreateAccountDoneTriggerScript() != null) body.put("createAccountDoneTriggerScript", request.getCreateAccountDoneTriggerScript());
+        if(request.getAuthenticationTriggerScript() != null) body.put("authenticationTriggerScript", request.getAuthenticationTriggerScript());
+        if(request.getAuthenticationDoneTriggerScript() != null) body.put("authenticationDoneTriggerScript", request.getAuthenticationDoneTriggerScript());
+        if(request.getCreateTakeOverTriggerScript() != null) body.put("createTakeOverTriggerScript", request.getCreateTakeOverTriggerScript());
+        if(request.getCreateTakeOverDoneTriggerScript() != null) body.put("createTakeOverDoneTriggerScript", request.getCreateTakeOverDoneTriggerScript());
+        if(request.getDoTakeOverTriggerScript() != null) body.put("doTakeOverTriggerScript", request.getDoTakeOverTriggerScript());
+        if(request.getDoTakeOverDoneTriggerScript() != null) body.put("doTakeOverDoneTriggerScript", request.getDoTakeOverDoneTriggerScript());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/game",
+				credential,
+				ENDPOINT,
+				CreateGameRequest.Constant.MODULE,
+				CreateGameRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(post, CreateGameResult.class);
+
+	}
+
+
+	/**
+	 * ゲームを削除します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void deleteGame(DeleteGameRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				DeleteGameRequest.Constant.MODULE,
+				DeleteGameRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		doRequest(delete, null);
 
 	}
 
@@ -403,6 +357,181 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 
 
 		return doRequest(get, DescribeServiceClassResult.class);
+
+	}
+
+
+	/**
+	 * ゲームを取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetGameResult getGame(GetGameRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetGameRequest.Constant.MODULE,
+				GetGameRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, GetGameResult.class);
+
+	}
+
+
+	/**
+	 * ゲームのステータスを取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetGameStatusResult getGameStatus(GetGameStatusRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "/status";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetGameStatusRequest.Constant.MODULE,
+				GetGameStatusRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(get, GetGameStatusResult.class);
+
+	}
+
+
+	/**
+	 * ゲームを更新します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public UpdateGameResult updateGame(UpdateGameRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("serviceClass", request.getServiceClass())
+				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getCreateAccountTriggerScript() != null) body.put("createAccountTriggerScript", request.getCreateAccountTriggerScript());
+        if(request.getCreateAccountDoneTriggerScript() != null) body.put("createAccountDoneTriggerScript", request.getCreateAccountDoneTriggerScript());
+        if(request.getAuthenticationTriggerScript() != null) body.put("authenticationTriggerScript", request.getAuthenticationTriggerScript());
+        if(request.getAuthenticationDoneTriggerScript() != null) body.put("authenticationDoneTriggerScript", request.getAuthenticationDoneTriggerScript());
+        if(request.getCreateTakeOverTriggerScript() != null) body.put("createTakeOverTriggerScript", request.getCreateTakeOverTriggerScript());
+        if(request.getCreateTakeOverDoneTriggerScript() != null) body.put("createTakeOverDoneTriggerScript", request.getCreateTakeOverDoneTriggerScript());
+        if(request.getDoTakeOverTriggerScript() != null) body.put("doTakeOverTriggerScript", request.getDoTakeOverTriggerScript());
+        if(request.getDoTakeOverDoneTriggerScript() != null) body.put("doTakeOverDoneTriggerScript", request.getDoTakeOverDoneTriggerScript());
+		HttpPut put = createHttpPut(
+				Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "",
+				credential,
+				ENDPOINT,
+				UpdateGameRequest.Constant.MODULE,
+				UpdateGameRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(put, UpdateGameResult.class);
+
+	}
+
+
+	/**
+	 * 引き継ぎ情報を登録します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public CreateTakeOverResult createTakeOver(CreateTakeOverRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("type", request.getType())
+				.put("userIdentifier", request.getUserIdentifier())
+				.put("password", request.getPassword());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "/takeover",
+				credential,
+				ENDPOINT,
+				CreateTakeOverRequest.Constant.MODULE,
+				CreateTakeOverRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(post, CreateTakeOverResult.class);
+
+	}
+
+
+	/**
+	 * 引き継ぎ情報を削除します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void deleteTakeOver(DeleteTakeOverRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "/takeover/" + (request.getType() == null || request.getType().equals("") ? "null" : request.getType()) + "/" + (request.getUserIdentifier() == null || request.getUserIdentifier().equals("") ? "null" : request.getUserIdentifier()) + "";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				DeleteTakeOverRequest.Constant.MODULE,
+				DeleteTakeOverRequest.Constant.FUNCTION);
+        if(request.getRequestId() != null) {
+            delete.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		doRequest(delete, null);
 
 	}
 
@@ -484,70 +613,6 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 
 
 	/**
-	 * ゲームを取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public GetGameResult getGame(GetGameRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				GetGameRequest.Constant.MODULE,
-				GetGameRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(get, GetGameResult.class);
-
-	}
-
-
-	/**
-	 * ゲームのステータスを取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public GetGameStatusResult getGameStatus(GetGameStatusRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "/status";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				GetGameStatusRequest.Constant.MODULE,
-				GetGameStatusRequest.Constant.FUNCTION);
-        if(request.getRequestId() != null) {
-            get.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(get, GetGameStatusResult.class);
-
-	}
-
-
-	/**
 	 * 引き継ぎ情報を取得します<br>
 	 * <br>
 	 * - 消費クオータ: 5<br>
@@ -583,46 +648,6 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 
 
 	/**
-	 * ゲームを更新します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public UpdateGameResult updateGame(UpdateGameRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("serviceClass", request.getServiceClass())
-				.put("changePasswordIfTakeOver", request.getChangePasswordIfTakeOver());
-
-        if(request.getDescription() != null) body.put("description", request.getDescription());
-        if(request.getCreateAccountTriggerScript() != null) body.put("createAccountTriggerScript", request.getCreateAccountTriggerScript());
-        if(request.getCreateAccountDoneTriggerScript() != null) body.put("createAccountDoneTriggerScript", request.getCreateAccountDoneTriggerScript());
-        if(request.getCreateTakeOverTriggerScript() != null) body.put("createTakeOverTriggerScript", request.getCreateTakeOverTriggerScript());
-        if(request.getCreateTakeOverDoneTriggerScript() != null) body.put("createTakeOverDoneTriggerScript", request.getCreateTakeOverDoneTriggerScript());
-        if(request.getDoTakeOverTriggerScript() != null) body.put("doTakeOverTriggerScript", request.getDoTakeOverTriggerScript());
-        if(request.getDoTakeOverDoneTriggerScript() != null) body.put("doTakeOverDoneTriggerScript", request.getDoTakeOverDoneTriggerScript());
-		HttpPut put = createHttpPut(
-				Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "",
-				credential,
-				ENDPOINT,
-				UpdateGameRequest.Constant.MODULE,
-				UpdateGameRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(put, UpdateGameResult.class);
-
-	}
-
-
-	/**
 	 * 引き継ぎ情報を更新します<br>
 	 * <br>
 	 * - 消費クオータ: 10<br>
@@ -639,7 +664,6 @@ public class Gs2AccountClient extends AbstractGs2Client<Gs2AccountClient> {
 		ObjectNode body = JsonNodeFactory.instance.objectNode()
 				.put("oldPassword", request.getOldPassword())
 				.put("password", request.getPassword());
-
 		HttpPut put = createHttpPut(
 				Gs2Constant.ENDPOINT_HOST + "/game/" + (request.getGameName() == null || request.getGameName().equals("") ? "null" : request.getGameName()) + "/takeover/" + (request.getType() == null || request.getType().equals("") ? "null" : request.getType()) + "/" + (request.getUserIdentifier() == null || request.getUserIdentifier().equals("") ? "null" : request.getUserIdentifier()) + "",
 				credential,

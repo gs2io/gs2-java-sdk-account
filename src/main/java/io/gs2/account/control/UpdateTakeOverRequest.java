@@ -40,11 +40,11 @@ public class UpdateTakeOverRequest extends Gs2UserRequest<UpdateTakeOverRequest>
 	/** 更新する引き継ぎ情報のユーザ固有IDを指定します。 */
 	private String userIdentifier;
 
-	/** 引き継ぎ時に利用する新しいパスワード */
-	private String password;
-
 	/** 引き継ぎ時に利用する現在設定されているパスワード */
 	private String oldPassword;
+
+	/** 引き継ぎ時に利用する新しいパスワード */
+	private String password;
 
 
 	/**
@@ -135,35 +135,6 @@ public class UpdateTakeOverRequest extends Gs2UserRequest<UpdateTakeOverRequest>
 	}
 
 	/**
-	 * 引き継ぎ時に利用する新しいパスワードを取得
-	 *
-	 * @return 引き継ぎ時に利用する新しいパスワード
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * 引き継ぎ時に利用する新しいパスワードを設定
-	 *
-	 * @param password 引き継ぎ時に利用する新しいパスワード
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * 引き継ぎ時に利用する新しいパスワードを設定
-	 *
-	 * @param password 引き継ぎ時に利用する新しいパスワード
-	 * @return this
-	 */
-	public UpdateTakeOverRequest withPassword(String password) {
-		setPassword(password);
-		return this;
-	}
-
-	/**
 	 * 引き継ぎ時に利用する現在設定されているパスワードを取得
 	 *
 	 * @return 引き継ぎ時に利用する現在設定されているパスワード
@@ -189,6 +160,35 @@ public class UpdateTakeOverRequest extends Gs2UserRequest<UpdateTakeOverRequest>
 	 */
 	public UpdateTakeOverRequest withOldPassword(String oldPassword) {
 		setOldPassword(oldPassword);
+		return this;
+	}
+
+	/**
+	 * 引き継ぎ時に利用する新しいパスワードを取得
+	 *
+	 * @return 引き継ぎ時に利用する新しいパスワード
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * 引き継ぎ時に利用する新しいパスワードを設定
+	 *
+	 * @param password 引き継ぎ時に利用する新しいパスワード
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * 引き継ぎ時に利用する新しいパスワードを設定
+	 *
+	 * @param password 引き継ぎ時に利用する新しいパスワード
+	 * @return this
+	 */
+	public UpdateTakeOverRequest withPassword(String password) {
+		setPassword(password);
 		return this;
 	}
 

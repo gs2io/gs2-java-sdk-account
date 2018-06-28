@@ -31,65 +31,42 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 		public static final String FUNCTION = "CreateGame";
 	}
 
-	/** アカウント新規作成時 に実行されるGS2-Script */
-	private String createAccountTriggerScript;
-
 	/** ゲームの名前 */
 	private String name;
-
-	/** 引き継ぎ情報登録完了時 に実行されるGS2-Script */
-	private String createTakeOverDoneTriggerScript;
-
-	/** ゲームのサービスクラス */
-	private String serviceClass;
-
-	/** アカウント新規作成完了時 に実行されるGS2-Script */
-	private String createAccountDoneTriggerScript;
-
-	/** 引き継ぎ実行完了時 に実行されるGS2-Script */
-	private String doTakeOverDoneTriggerScript;
-
-	/** 引き継ぎ情報登録時 に実行されるGS2-Script */
-	private String createTakeOverTriggerScript;
-
-	/** 引き継ぎ実行時 に実行されるGS2-Script */
-	private String doTakeOverTriggerScript;
-
-	/** 引き継ぎ時にアカウントのパスワードを変更するか */
-	private Boolean changePasswordIfTakeOver;
 
 	/** ゲームの説明 */
 	private String description;
 
+	/** ゲームのサービスクラス */
+	private String serviceClass;
 
-	/**
-	 * アカウント新規作成時 に実行されるGS2-Scriptを取得
-	 *
-	 * @return アカウント新規作成時 に実行されるGS2-Script
-	 */
-	public String getCreateAccountTriggerScript() {
-		return createAccountTriggerScript;
-	}
+	/** 引き継ぎ時にアカウントのパスワードを変更するか */
+	private Boolean changePasswordIfTakeOver;
 
-	/**
-	 * アカウント新規作成時 に実行されるGS2-Scriptを設定
-	 *
-	 * @param createAccountTriggerScript アカウント新規作成時 に実行されるGS2-Script
-	 */
-	public void setCreateAccountTriggerScript(String createAccountTriggerScript) {
-		this.createAccountTriggerScript = createAccountTriggerScript;
-	}
+	/** アカウント新規作成時 に実行されるGS2-Script */
+	private String createAccountTriggerScript;
 
-	/**
-	 * アカウント新規作成時 に実行されるGS2-Scriptを設定
-	 *
-	 * @param createAccountTriggerScript アカウント新規作成時 に実行されるGS2-Script
-	 * @return this
-	 */
-	public CreateGameRequest withCreateAccountTriggerScript(String createAccountTriggerScript) {
-		setCreateAccountTriggerScript(createAccountTriggerScript);
-		return this;
-	}
+	/** アカウント新規作成完了時 に実行されるGS2-Script */
+	private String createAccountDoneTriggerScript;
+
+	/** 認証時 に実行されるGS2-Script */
+	private String authenticationTriggerScript;
+
+	/** 認証完了時 に実行されるGS2-Script */
+	private String authenticationDoneTriggerScript;
+
+	/** 引き継ぎ情報登録時 に実行されるGS2-Script */
+	private String createTakeOverTriggerScript;
+
+	/** 引き継ぎ情報登録完了時 に実行されるGS2-Script */
+	private String createTakeOverDoneTriggerScript;
+
+	/** 引き継ぎ実行時 に実行されるGS2-Script */
+	private String doTakeOverTriggerScript;
+
+	/** 引き継ぎ実行完了時 に実行されるGS2-Script */
+	private String doTakeOverDoneTriggerScript;
+
 
 	/**
 	 * ゲームの名前を取得
@@ -121,31 +98,31 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 	}
 
 	/**
-	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを取得
+	 * ゲームの説明を取得
 	 *
-	 * @return 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 * @return ゲームの説明
 	 */
-	public String getCreateTakeOverDoneTriggerScript() {
-		return createTakeOverDoneTriggerScript;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを設定
+	 * ゲームの説明を設定
 	 *
-	 * @param createTakeOverDoneTriggerScript 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 * @param description ゲームの説明
 	 */
-	public void setCreateTakeOverDoneTriggerScript(String createTakeOverDoneTriggerScript) {
-		this.createTakeOverDoneTriggerScript = createTakeOverDoneTriggerScript;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
-	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを設定
+	 * ゲームの説明を設定
 	 *
-	 * @param createTakeOverDoneTriggerScript 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 * @param description ゲームの説明
 	 * @return this
 	 */
-	public CreateGameRequest withCreateTakeOverDoneTriggerScript(String createTakeOverDoneTriggerScript) {
-		setCreateTakeOverDoneTriggerScript(createTakeOverDoneTriggerScript);
+	public CreateGameRequest withDescription(String description) {
+		setDescription(description);
 		return this;
 	}
 
@@ -179,6 +156,64 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 	}
 
 	/**
+	 * 引き継ぎ時にアカウントのパスワードを変更するかを取得
+	 *
+	 * @return 引き継ぎ時にアカウントのパスワードを変更するか
+	 */
+	public Boolean getChangePasswordIfTakeOver() {
+		return changePasswordIfTakeOver;
+	}
+
+	/**
+	 * 引き継ぎ時にアカウントのパスワードを変更するかを設定
+	 *
+	 * @param changePasswordIfTakeOver 引き継ぎ時にアカウントのパスワードを変更するか
+	 */
+	public void setChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
+		this.changePasswordIfTakeOver = changePasswordIfTakeOver;
+	}
+
+	/**
+	 * 引き継ぎ時にアカウントのパスワードを変更するかを設定
+	 *
+	 * @param changePasswordIfTakeOver 引き継ぎ時にアカウントのパスワードを変更するか
+	 * @return this
+	 */
+	public CreateGameRequest withChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
+		setChangePasswordIfTakeOver(changePasswordIfTakeOver);
+		return this;
+	}
+
+	/**
+	 * アカウント新規作成時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return アカウント新規作成時 に実行されるGS2-Script
+	 */
+	public String getCreateAccountTriggerScript() {
+		return createAccountTriggerScript;
+	}
+
+	/**
+	 * アカウント新規作成時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createAccountTriggerScript アカウント新規作成時 に実行されるGS2-Script
+	 */
+	public void setCreateAccountTriggerScript(String createAccountTriggerScript) {
+		this.createAccountTriggerScript = createAccountTriggerScript;
+	}
+
+	/**
+	 * アカウント新規作成時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createAccountTriggerScript アカウント新規作成時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public CreateGameRequest withCreateAccountTriggerScript(String createAccountTriggerScript) {
+		setCreateAccountTriggerScript(createAccountTriggerScript);
+		return this;
+	}
+
+	/**
 	 * アカウント新規作成完了時 に実行されるGS2-Scriptを取得
 	 *
 	 * @return アカウント新規作成完了時 に実行されるGS2-Script
@@ -208,31 +243,60 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 	}
 
 	/**
-	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを取得
+	 * 認証時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return 引き継ぎ実行完了時 に実行されるGS2-Script
+	 * @return 認証時 に実行されるGS2-Script
 	 */
-	public String getDoTakeOverDoneTriggerScript() {
-		return doTakeOverDoneTriggerScript;
+	public String getAuthenticationTriggerScript() {
+		return authenticationTriggerScript;
 	}
 
 	/**
-	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを設定
+	 * 認証時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param doTakeOverDoneTriggerScript 引き継ぎ実行完了時 に実行されるGS2-Script
+	 * @param authenticationTriggerScript 認証時 に実行されるGS2-Script
 	 */
-	public void setDoTakeOverDoneTriggerScript(String doTakeOverDoneTriggerScript) {
-		this.doTakeOverDoneTriggerScript = doTakeOverDoneTriggerScript;
+	public void setAuthenticationTriggerScript(String authenticationTriggerScript) {
+		this.authenticationTriggerScript = authenticationTriggerScript;
 	}
 
 	/**
-	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを設定
+	 * 認証時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param doTakeOverDoneTriggerScript 引き継ぎ実行完了時 に実行されるGS2-Script
+	 * @param authenticationTriggerScript 認証時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public CreateGameRequest withDoTakeOverDoneTriggerScript(String doTakeOverDoneTriggerScript) {
-		setDoTakeOverDoneTriggerScript(doTakeOverDoneTriggerScript);
+	public CreateGameRequest withAuthenticationTriggerScript(String authenticationTriggerScript) {
+		setAuthenticationTriggerScript(authenticationTriggerScript);
+		return this;
+	}
+
+	/**
+	 * 認証完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 認証完了時 に実行されるGS2-Script
+	 */
+	public String getAuthenticationDoneTriggerScript() {
+		return authenticationDoneTriggerScript;
+	}
+
+	/**
+	 * 認証完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param authenticationDoneTriggerScript 認証完了時 に実行されるGS2-Script
+	 */
+	public void setAuthenticationDoneTriggerScript(String authenticationDoneTriggerScript) {
+		this.authenticationDoneTriggerScript = authenticationDoneTriggerScript;
+	}
+
+	/**
+	 * 認証完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param authenticationDoneTriggerScript 認証完了時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public CreateGameRequest withAuthenticationDoneTriggerScript(String authenticationDoneTriggerScript) {
+		setAuthenticationDoneTriggerScript(authenticationDoneTriggerScript);
 		return this;
 	}
 
@@ -266,6 +330,35 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 	}
 
 	/**
+	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 */
+	public String getCreateTakeOverDoneTriggerScript() {
+		return createTakeOverDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createTakeOverDoneTriggerScript 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 */
+	public void setCreateTakeOverDoneTriggerScript(String createTakeOverDoneTriggerScript) {
+		this.createTakeOverDoneTriggerScript = createTakeOverDoneTriggerScript;
+	}
+
+	/**
+	 * 引き継ぎ情報登録完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createTakeOverDoneTriggerScript 引き継ぎ情報登録完了時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public CreateGameRequest withCreateTakeOverDoneTriggerScript(String createTakeOverDoneTriggerScript) {
+		setCreateTakeOverDoneTriggerScript(createTakeOverDoneTriggerScript);
+		return this;
+	}
+
+	/**
 	 * 引き継ぎ実行時 に実行されるGS2-Scriptを取得
 	 *
 	 * @return 引き継ぎ実行時 に実行されるGS2-Script
@@ -295,60 +388,31 @@ public class CreateGameRequest extends Gs2BasicRequest<CreateGameRequest> {
 	}
 
 	/**
-	 * 引き継ぎ時にアカウントのパスワードを変更するかを取得
+	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return 引き継ぎ時にアカウントのパスワードを変更するか
+	 * @return 引き継ぎ実行完了時 に実行されるGS2-Script
 	 */
-	public Boolean getChangePasswordIfTakeOver() {
-		return changePasswordIfTakeOver;
+	public String getDoTakeOverDoneTriggerScript() {
+		return doTakeOverDoneTriggerScript;
 	}
 
 	/**
-	 * 引き継ぎ時にアカウントのパスワードを変更するかを設定
+	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param changePasswordIfTakeOver 引き継ぎ時にアカウントのパスワードを変更するか
+	 * @param doTakeOverDoneTriggerScript 引き継ぎ実行完了時 に実行されるGS2-Script
 	 */
-	public void setChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
-		this.changePasswordIfTakeOver = changePasswordIfTakeOver;
+	public void setDoTakeOverDoneTriggerScript(String doTakeOverDoneTriggerScript) {
+		this.doTakeOverDoneTriggerScript = doTakeOverDoneTriggerScript;
 	}
 
 	/**
-	 * 引き継ぎ時にアカウントのパスワードを変更するかを設定
+	 * 引き継ぎ実行完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param changePasswordIfTakeOver 引き継ぎ時にアカウントのパスワードを変更するか
+	 * @param doTakeOverDoneTriggerScript 引き継ぎ実行完了時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public CreateGameRequest withChangePasswordIfTakeOver(Boolean changePasswordIfTakeOver) {
-		setChangePasswordIfTakeOver(changePasswordIfTakeOver);
-		return this;
-	}
-
-	/**
-	 * ゲームの説明を取得
-	 *
-	 * @return ゲームの説明
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * ゲームの説明を設定
-	 *
-	 * @param description ゲームの説明
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
-	 * ゲームの説明を設定
-	 *
-	 * @param description ゲームの説明
-	 * @return this
-	 */
-	public CreateGameRequest withDescription(String description) {
-		setDescription(description);
+	public CreateGameRequest withDoTakeOverDoneTriggerScript(String doTakeOverDoneTriggerScript) {
+		setDoTakeOverDoneTriggerScript(doTakeOverDoneTriggerScript);
 		return this;
 	}
 

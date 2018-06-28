@@ -27,23 +27,23 @@ import io.gs2.account.model.*;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CreateAccountResult {
 
-	/** 引き継ぎ情報 */
+	/** アカウント情報 */
 	private Account item;
 
 
 	/**
-	 * 引き継ぎ情報を取得
+	 * アカウント情報を取得
 	 *
-	 * @return 引き継ぎ情報
+	 * @return アカウント情報
 	 */
 	public Account getItem() {
 		return item;
 	}
 
 	/**
-	 * 引き継ぎ情報を設定
+	 * アカウント情報を設定
 	 *
-	 * @param item 引き継ぎ情報
+	 * @param item アカウント情報
 	 */
 	public void setItem(Account item) {
 		this.item = item;
